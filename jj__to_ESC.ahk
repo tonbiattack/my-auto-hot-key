@@ -1,13 +1,13 @@
 ﻿#Requires AutoHotkey v2.0
 
+global lastJTime := 0
+
 ; -----------------------------------------
 ; jj → Esc（300ms以内・IMEがOFFのときだけ）
 ; -----------------------------------------
-
-global lastJTime := 0
-
 j:: {
-    ; 現在時刻
+    global lastJTime
+
     curr := A_TickCount
 
     ; 前回の j から300ms以内 && IMEがOFFなら Esc
@@ -27,8 +27,6 @@ j:: {
 IME_IsOn(*) {
     hwnd := WinGetID("A")
     defaultIME := DllCall("imm32\ImmGetDefaultIMEWnd", "UInt", hwnd, "UInt")
-    result := DllCall("SendMessage", "UInt", defaultIME, "UInt", 0x0283, "UInt", 0x0005, "UInt", 0)
-
-    ; 0 ＝ OFF（英数） / 1以上 = ON（日本語入力）
-    return result != 0
+    state := DllCall("SendMessage", "UInt", defaultIME, "UInt", 0x0283, "UInt", 0x0005, "UInt", 0)
+    return state != 0 ; 1 = ON, 0 = OFF
 }
