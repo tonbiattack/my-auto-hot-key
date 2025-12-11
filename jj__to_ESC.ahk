@@ -2,29 +2,18 @@
 
 global lastJTime := 0
 
-j::
-{
+j:: {
     global lastJTime
     curr := A_TickCount
 
-    ; jj 判定（300ms以内）
+    ; 前回の j から300ms以内なら Esc
     if (curr - lastJTime < 300) {
         Send "{Esc}"
         lastJTime := 0
         return
     }
 
+    ; 1回目の j は普通に j を入力して、時刻を記録
+    Send "j"
     lastJTime := curr
-
-    ; KeyWait の戻り値：
-    ;   true  = タイムアウト（→普通の j を送る）
-    ;   false = キーが離された（→次の j に備える）
-    timedOut := KeyWait("j", "T0.3")
-
-    if (timedOut) {
-        Send "j"
-        lastJTime := 0
-    }
-
-    return
 }
