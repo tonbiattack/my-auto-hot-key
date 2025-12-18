@@ -1,3 +1,4 @@
+#Requires AutoHotkey v2.0
 LAlt & `::{
     Send "{vkF3}"
     Sleep 10
