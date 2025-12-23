@@ -1,0 +1,1 @@
+^!w:: Send !{PrintScreen}
