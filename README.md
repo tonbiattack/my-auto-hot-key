@@ -1,5 +1,6 @@
 # my-auto-hot-key
 https://www.autohotkey.com/
 
-Ime OnにしてからAlt + `で確実に Ime Offにできる。
-この二つはコンビで利用するようにする
+現在利用しているものは
+ime_off
+のみ jj__to_ESC はvscodeで jj で下の行に移動するときに干渉してしまうので利用していない。
